@@ -61,11 +61,11 @@ else
   config.robot.adapter=:shell
 end
 #slack adapter demands a value even in dev when we aren't using it..
-config.adapters.slack.token=ENV.fetch('SLACK_TOKEN','')
+#config.adapters.slack.token=ENV.fetch('SLACK_TOKEN','')
   ## Example: Set configuration for any loaded handlers. See the handler's
   ## documentation for options.
   # config.handlers.some_handler.some_config_key = "value"
+config.adapters.slack.token = "xoxb-1447072035412-1446112783174-R472dpp7p3dtOpBrgpbn3sK7"
 
-  
 
 end
