@@ -69,3 +69,7 @@ config.adapters.slack.token=ENV.fetch('SLACK_TOKEN','')
   
 
 end
+Lita.configure do |config|
+  config.robot.adapter = :slack
+  config.adapters.slack.token = "xoxb-1447072035412-1446112783174-9L8eeELMZuXIlZaakNTmjWHP"
+end
