@@ -8,7 +8,7 @@ Lita.configure do |config|
   # The severity of messages to log. Options are:
   # :debug, :info, :warn, :error, :fatal
   # Messages at the selected level and above will be logged.
-  config.robot.log_level = :info
+  config.robot.log_level = ENV.fetch('LOG_LEVEL', 'info').to_sym
 
   # An array of user IDs that are considered administrators. These users
   # the ability to add and remove other users from authorization groups.
@@ -51,6 +51,17 @@ module Lita
   end
 end
 
+
+
+if ENV['RACK_ENV']=='production'
+  config.robot.adapter = :slack
+  config.redis[:url]=ENV.fetch('REDIS_URL')
+  #config.redis[:url]=ENV.fetch('redis://h:p3b0367716aca36ce25b1779241754684109aa4421e23845e1ad85c3f6d203b13@ec2-23-21-82-81.compute-1.amazonaws.com:11959')
+else
+  config.robot.adapter=:shell
+end
+#slack adapter demands a value even in dev when we aren't using it..
+config.adapters.slack.token=ENV.fetch('SLACK_TOKEN','')
   ## Example: Set configuration for any loaded handlers. See the handler's
   ## documentation for options.
   # config.handlers.some_handler.some_config_key = "value"
